@@ -36,7 +36,7 @@ use Omnipay\Omnipay;
 use Omnipay\Common\CreditCard;
 
 $gateway = Omnipay::create('Veritrans_VTWeb');
-$gateway->setServerKey('VT-server-eEpn68iOEtiwFHJIU2fOWYWS');
+$gateway->setServerKey('server-key');
 $gateway->setEnvironment('sandbox'); // [production|sandbox] default to production
  // Optional
 $item1_details = array(
