@@ -36,18 +36,59 @@ use Omnipay\Omnipay;
 use Omnipay\Common\CreditCard;
 
 $gateway = Omnipay::create('Veritrans_VTWeb');
-$gateway->setServerKey('server-key-replace-with-yours');
+$gateway->setServerKey('VT-server-eEpn68iOEtiwFHJIU2fOWYWS');
 $gateway->setEnvironment('sandbox'); // [production|sandbox] default to production
+ // Optional
+$item1_details = array(
+    'id' => 'a1',
+    'price' => 50000,
+    'quantity' => 2,
+    'name' => "Apple"
+    );
+
+// Optional
+$item2_details = array(
+    'id' => 'a2',
+    'price' => 45000,
+    'quantity' => 1,
+    'name' => "Orange"
+    );
+
+// Optional
+$item_details = array ($item1_details, $item2_details);
+
+// Optional
+$shipping_address = array(
+    'first_name'    => "Obet",
+    'last_name'     => "Supriadi",
+    'address'       => "Manggis 90",
+    'city'          => "Jakarta",
+    'postal_code'   => "16601",
+    'phone'         => "08113366345",
+    'country_code'  => 'IDN'
+    );
+
+// Optional
+$customer_details = array(
+    'first_name'    => "Andri",
+    'last_name'     => "Litani",
+    'email'         => "andri@litani.com",
+    'phone'         => "081122334455",
+    // 'billing_address'  => $billing_address,
+    'shipping_address' => $shipping_address
+    );
 
 $data = array(
-    'transactionId' => '123456',
+    'transactionId' => '1234569',
     'amount'        => '145000.00',
     'card'          => new CreditCard(),
     'vtwebConfiguration' => array(
         'credit_card_3d_secure' => true,
     ),  
     'currency'      => 'IDR',
+    'itemDetails'   => $item_details
 );
+
 
 $response = $gateway->purchase($data)->send();
 
