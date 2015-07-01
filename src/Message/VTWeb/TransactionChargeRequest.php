@@ -25,6 +25,7 @@ class TransactionChargeRequest extends AbstractRequest
         if ($this->getCurrency() === 'IDR') {
             $amountInteger /= 100;
         }
+       
 
         $data = array(
             'payment_type' => 'vtweb',
@@ -55,6 +56,7 @@ class TransactionChargeRequest extends AbstractRequest
                     'country_code' => $this->getCard()->getShippingCountry(),
                 ),
             ),
+            'item_details' => $this->getItemDetails(),
         );
 
         $dataStr = json_encode($data);
@@ -65,5 +67,15 @@ class TransactionChargeRequest extends AbstractRequest
     public function getEndpoint()
     {
         return $this->getBaseUrl().'/charge';
+    }
+
+    public function getItemDetails()
+    {
+        return $this->getParameter('itemDetails');
+    }
+
+    public function setItemDetails($value)
+    {
+        return $this->setParameter('itemDetails', $value);
     }
 }
